@@ -2,7 +2,15 @@
 function sshrc() {
     local MYNEWHOME="/tmp/`whoami`@`hostname`"
     local SSHRC=${MYHOME:=~/.sshrc}
-    ssh -t ${*:1} "mkdir -p $MYNEWHOME; echo $'"`tar cz -h -C $SSHRC . | xxd -ps`"' | xxd -ps -r | tar xz -C $MYNEWHOME; export MYHOME=$MYNEWHOME; bash --rcfile $MYNEWHOME/.bashrc; rm -r $MYNEWHOME"
+    if [ -d $SSHRC ]; then
+        if [ -e $SSHRC/.bashrc ]; then
+            ssh -t ${*:1} "mkdir -p $MYNEWHOME; echo $'"`tar cz -h -C $SSHRC . | xxd -ps`"' | xxd -ps -r | tar xz -C $MYNEWHOME; export MYHOME=$MYNEWHOME; bash --rcfile $MYNEWHOME/.bashrc; rm -r $MYNEWHOME"
+        else
+            echo "No such file: $SSHRC/.bashrc"
+        fi
+    else
+        echo "No such directory: $SSHRC"
+    fi
 }
 sshrc $@
 #complete -F _ssh sshrc
