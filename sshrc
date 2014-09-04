@@ -1,0 +1,8 @@
+#!/bin/bash
+function sshrc() {
+    local MYNEWHOME="/tmp/`whoami`@`hostname`"
+    local SSHRC=${MYHOME:=~/.sshrc}
+    ssh -t ${*:1} "mkdir -p $MYNEWHOME; echo $'"`tar cz -h -C $SSHRC . | xxd -ps`"' | xxd -ps -r | tar xz -C $MYNEWHOME; export MYHOME=$MYNEWHOME; bash --rcfile $MYNEWHOME/.bashrc; rm -r $MYNEWHOME"
+}
+sshrc $@
+#complete -F _ssh sshrc
