@@ -1,8 +1,9 @@
 # Configure your paths and filenames
 SOURCEBINPATH=~/git/sshrc
 SOURCEBIN=sshrc
-DEBFOLDER=~/git/sshrc/somescripts
+DEBFOLDER=~/git/sshrc/debfolder
 DEBVERSION=0.1
+export DEBFULLNAME="Russell Stewart"
 
 DEBFOLDERNAME=$DEBFOLDER-$DEBVERSION
 
@@ -14,7 +15,7 @@ cp $SOURCEBINPATH/$SOURCEBIN $DEBFOLDERNAME
 cd $DEBFOLDERNAME
 
 # Create the packaging skeleton (debian/*)
-dh_make -s --indep --createorig 
+dh_make -s --indep --createorig -p 'sshrc' --copyright MIT --email 'russell.s.stewart@gmail.com'
 
 # Remove make calls
 grep -v makefile debian/rules > debian/rules.new 
