@@ -1,16 +1,18 @@
 #!/bin/bash
 function sshrc() {
-    local MYNEWHOME="/tmp/`whoami`@`hostname`"
-    local SSHRC=${MYHOME:=~/.sshrc}
-    if [ -d $SSHRC ]; then
-        if [ -e $SSHRC/.bashrc ]; then
-            ssh -t ${*:1} "mkdir -p $MYNEWHOME; echo $'"`tar cz -h -C $SSHRC . | xxd -ps`"' | xxd -ps -r | tar xz -C $MYNEWHOME; export MYHOME=$MYNEWHOME; bash --rcfile $MYNEWHOME/.bashrc; rm -r $MYNEWHOME"
-        else
-            echo "No such file: $SSHRC/.bashrc"
+    local SSHHOME=${SSHHOME:=~}
+    if [ -e $SSHHOME/.sshrc ]; then
+        local files=.sshrc
+        if [ -d $SSHHOME/.sshrc.d ]; then
+            files="$files .sshrc.d"
         fi
+        ssh -t ${*:1} "export SSHRCBIN="'$(mktemp -d)'"; echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHRCBIN/sshrc'"; chmod +x "'$SSHRCBIN/sshrc'"; export SSHHOME="'$(mktemp -d)'"; export SSHRCCLEANUP="'$SSHHOME'"; echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar xz -C "'$SSHHOME'"; export SSHHOME="'$SSHHOME'"; bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc; export PATH=$PATH:"'$SSHRCBIN'";') ; rm -rf "'$SSHRCCLEANUP'" "'$SSHRCBIN'""
     else
-        echo "No such directory: $SSHRC"
+        echo "No such file: $SSHHOME/.sshrc"
     fi
 }
-sshrc $@
-#complete -F _ssh sshrc
+if [ $1 ]; then
+    sshrc $@
+else
+    ssh
+fi
