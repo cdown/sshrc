@@ -1,0 +1,35 @@
+#!/bin/bash
+
+foo() {
+    local control=$1/debian/control
+    local changelog=$1/debian/changelog
+    echo $changelog
+    
+    cat $control | sed -e 's/Section\:.*/Section\: misc/' | sed -e 's/Homepage\:.*/Homepage\: http\:\/\/stewart.guru/' > /tmp/tmpsshrc
+    mv /tmp/tmpsshrc $control
+
+    cat $changelog | sed -e 's/unstable/'$2'/' > /tmp/tmpsshrc
+    mv /tmp/tmpsshrc $changelog
+}
+
+bar() {
+    local DEBFOLDER=debfolder
+    local base_version=0.2
+    for distro in precise trusty ; do
+        cd ~/git/sshrc
+        rm -rf build
+        mkdir -p build
+        local DEBVERSION="$base_version-$distro"
+        local DEBFOLDERNAME="$DEBFOLDER-$DEBVERSION"
+        cat packager | sed -e 's/^DEBVERSION=.*/DEBVERSION='$DEBVERSION'/' > /tmp/tmpsshrc
+        mv /tmp/tmpsshrc packager
+        sh packager
+        foo build/$DEBFOLDERNAME $distro
+        cd build/$DEBFOLDERNAME
+        debuild -S
+        cd ~/git/sshrc
+        rm -rf build-$distro
+        mv build build-$distro
+    done
+}
+bar 
