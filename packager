@@ -1,7 +1,7 @@
 # Configure your paths and filenames
 SOURCEBINPATH=~/git/sshrc
 SOURCEBIN=sshrc
-DEBFOLDER=~/git/sshrc/debfolder
+DEBFOLDER=~/git/sshrc/build/debfolder
 DEBVERSION=0.1
 export DEBFULLNAME="Russell Stewart"
 
