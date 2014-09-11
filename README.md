@@ -42,4 +42,4 @@ The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try n
     $ foo
     I work with tmux, too
     
-Note the need for -L in the tmux alias. Tmux inherits its environment from the shell that starts tmux. You'll need to run your own server, which will load off the SHELL=bashsshrc executable. Be careful not to start the first shell on a regular tmux server (as long as `tmux ls` is nonempty you're okay) without running `unset SHELL`. Otherwise your server's coinhabitants will get your configurations in their own tmux shells.
+Note the need for -S in the tmux alias. Tmux inherits its environment from the shell that starts tmux. You'll need to run your own server, which will load off the SHELL=bashsshrc executable. Be careful not to start the first shell on a regular tmux server (as long as `tmux ls` is nonempty you're okay) without running `unset SHELL`. Otherwise your server's coinhabitants will get your configurations in their own tmux shells.
