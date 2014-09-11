@@ -36,9 +36,9 @@ Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login 
     vim # jk -> normal mode will work
 
 <h2>Tmux Usage</h2>
-    echo 'SHELL=$SSHHOME/bashsshrc;alias tmuxsshrc="tmux -L russelltmuxserver";alias foo="echo I work with tmux, too"' > ~/.sshrc
+    echo 'SHELL=$SSHHOME/bashsshrc;alias tmuxrussell="tmux -L russelltmuxserver";alias foo="echo I work with tmux, too"' > ~/.sshrc
     sshrc me@myserver
-    tmuxsshrc
+    tmuxrussell
     foo
     > I work with tmux, too
     
