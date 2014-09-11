@@ -42,4 +42,4 @@ Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login 
     foo
     > I work with tmux, too
     
-Note the need for -L in the tmux alias. Tmux inherits its environment from the shell that starts tmux. You'll need to run your own server, which will load off the SHELL=bashsshrc executable. Be careful not to start a new regular tmux server without running `unset SHELL`, or your server's coinhabitants will get your configurations in their own shells.
+Note the need for -L in the tmux alias. Tmux inherits its environment from the shell that starts tmux. You'll need to run your own server, which will load off the SHELL=bashsshrc executable. Be careful not to start the first shell on a regular tmux server (as long as `tmux ls` is empty you're okay) without running `unset SHELL`. Otherwise your server's coinhabitants will get your configurations in their own shells.
