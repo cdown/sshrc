@@ -10,13 +10,16 @@ function sshrc() {
             export SSHHOME="'$(mktemp -d)'"
             echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHHOME/sshrc'"
             chmod +x "'$SSHHOME/sshrc'"
-            echo $'23212f7573722f62696e2f656e7620626173680a62617368202d2d726366
-            696c65203c286563686f20270a6966205b202d65202f6574632f62617368
-            2e626173687263205d3b207468656e20736f75726365202f6574632f6261
-            73682e6261736872633b2066690a6966205b202d65207e2f2e6261736872
-            63205d3b207468656e20736f75726365207e2f2e6261736872633b206669
-            0a736f75726365202724535348484f4d45272f2e73736872633b0a657870
-            6f727420504154483d24504154483a2724535348484f4d45270a27290a' | xxd -ps -r > "'$SSHHOME/bashsshrc'"
+            echo $'"$( cat << 'EOF' | xxd -ps
+#!/usr/bin/env bash
+bash --rcfile <(echo '
+if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
+if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
+source '$SSHHOME'/.sshrc;
+export PATH=$PATH:'$SSHHOME'
+')
+EOF
+)"' | xxd -ps -r > "'$SSHHOME/bashsshrc'"
             chmod +x "'$SSHHOME/bashsshrc'"
             export SSHRCCLEANUP="'$SSHHOME'"
             echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar xz -C "'$SSHHOME'"
