@@ -21,7 +21,7 @@
 
 <h2>Advanced Usage</h2>
     mkdir -p ~/.sshrc.d
-    echo "welcome!" > ~/.sshrc.d/a.txt
+    echo 'welcome!' > ~/.sshrc.d/a.txt
     echo 'cat $SSHHOME/.sshrc.d/a.txt' > ~/.sshrc
     sshrc me@myserver
     > welcome!
