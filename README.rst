@@ -1,4 +1,4 @@
-installation
+Installation
 ------------
 Ubuntu 12.04 or 14.04:
 ::
@@ -9,6 +9,15 @@ Ubuntu 12.04 or 14.04:
 
 Everything else:
 ::
-    wget -qO- https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc > ~/sshrc
-    chmod +x ~/sshrc
+    wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
+    chmod +x sshrc
+    sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
+::
+
+Usage
+-----
+
+::
+    echo "alias foo='echo bar'" > ~/.sshrc
+    sshrc me@myserver
 ::
