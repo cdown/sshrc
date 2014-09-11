@@ -6,7 +6,19 @@ function sshrc() {
         if [ -d $SSHHOME/.sshrc.d ]; then
             files="$files .sshrc.d"
         fi
-        ssh -t ${*:1} "export SSHRCBIN="'$(mktemp -d)'"; echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHRCBIN/sshrc'"; chmod +x "'$SSHRCBIN/sshrc'"; export SSHHOME="'$(mktemp -d)'"; export SSHRCCLEANUP="'$SSHHOME'"; echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar xz -C "'$SSHHOME'"; export SSHHOME="'$SSHHOME'"; bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc; export PATH=$PATH:"'$SSHRCBIN'";') ; rm -rf "'$SSHRCCLEANUP'" "'$SSHRCBIN'""
+        ssh -t ${*:1} "
+            export SSHHOME="'$(mktemp -d)'"
+            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHHOME/sshrc'"
+            chmod +x "'$SSHHOME/sshrc'"
+            echo $'"$(cat `which sshrcbash` | xxd -ps)"' | xxd -ps -r > "'$SSHHOME/sshrcbash'"
+            chmod +x "'$SSHHOME/sshrcbash'"
+            export SSHRCCLEANUP="'$SSHHOME'"
+            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar xz -C "'$SSHHOME'"
+            export SSHHOME="'$SSHHOME'"
+            bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc
+            export PATH=$PATH:"'$SSHHOME'";') 
+            rm -rf "'$SSHRCCLEANUP'" 
+            "
     else
         echo "No such file: $SSHHOME/.sshrc"
     fi
