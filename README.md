@@ -1,6 +1,6 @@
 <h2>Installation</h2>
 
-<h3>Ubuntu 12.04 or 14.04:</h3>
+<h3>Ubuntu 12.04 or 14.04 (not 12.10,13.04, or 13.10):</h3>
     
     sudo add-apt-repository ppa:russell-s-stewart/ppa
     sudo apt-get update
