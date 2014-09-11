@@ -13,8 +13,15 @@
     sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
 
 
-<h1>Usage</h1>
-
+<h2>Basic Usage</h2>
     echo "alias foo='echo bar'" > ~/.sshrc
     sshrc me@myserver
+    foo
+    > bar
 
+<h2>Advanced Usage</h2>
+    mkdir -p ~/.sshrc.d
+    echo "welcome!" > ~/.sshrc.d/a.txt
+    echo 'cat $SSHHOME/.sshrc.d/a.txt' > ~/.sshrc
+    sshrc me@myserver
+    > welcome!
