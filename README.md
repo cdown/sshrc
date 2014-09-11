@@ -25,6 +25,8 @@
     echo 'cat $SSHHOME/.sshrc.d/a.txt' > ~/.sshrc
     sshrc me@myserver
     > welcome!
+    
+Try not to stuff too much junk into .sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts.
 
 <h2>Vim Usage</h2>
     mkdir -p ~/.sshrc.d
