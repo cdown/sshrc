@@ -27,6 +27,7 @@
     > welcome!
 
 <h2>Vim Usage</h2>
+    mkdir -p ~/.sshrc.d
     echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
     echo 'VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
     sshrc me@myserver
