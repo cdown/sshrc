@@ -26,7 +26,7 @@
     sshrc me@myserver
     > welcome!
     
-Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts. Such is the cost of wrapping around ssh and not building a standalone binary.
+Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts. Such is the cost of wrapping around ssh -t.
 
 <h2>Vim Usage</h2>
     mkdir -p ~/.sshrc.d
