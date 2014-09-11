@@ -14,10 +14,9 @@
 
 
 <h2>Basic Usage</h2>
-    $ echo "alias foo='echo bar'" > ~/.sshrc
+    $ echo "echo welcome" > ~/.sshrc
     $ sshrc me@myserver
-    $ foo
-    bar
+    welcome
 
 <h2>Advanced Usage</h2>
     $ mkdir -p ~/.sshrc.d
