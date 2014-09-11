@@ -21,7 +21,7 @@
 <h2>Advanced Usage</h2>
     $ mkdir -p ~/.sshrc.d
     $ echo 'some data' > ~/.sshrc.d/data.txt
-    $ echo 'cat $SSHHOME/.sshrc.d/a.txt' > ~/.sshrc
+    $ echo 'cat $SSHHOME/.sshrc.d/data.txt' > ~/.sshrc
     $ sshrc me@myserver
     some data
     
