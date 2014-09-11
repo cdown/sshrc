@@ -21,12 +21,12 @@
 
 <h2>Advanced Usage</h2>
     mkdir -p ~/.sshrc.d
-    echo 'welcome!' > ~/.sshrc.d/a.txt # the contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d
+    echo 'welcome!' > ~/.sshrc.d/a.txt
     echo 'cat $SSHHOME/.sshrc.d/a.txt' > ~/.sshrc
     sshrc me@myserver
     > welcome!
     
-Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts.
+The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts.
 
 <h2>Vim Usage</h2>
     mkdir -p ~/.sshrc.d
