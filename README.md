@@ -36,7 +36,7 @@ The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try n
     vim # jk -> normal mode will work
 
 <h2>Tmux Usage</h2>
-    echo 'SHELL=$SSHHOME/bashsshrc;alias tmuxrussell="tmux -L russelltmuxserver";alias foo="echo I work with tmux, too"' > ~/.sshrc
+    echo 'SHELL=$SSHHOME/bashsshrc;alias tmuxrussell="tmux -S /tmp/russelltmuxserver";alias foo="echo I work with tmux, too"' > ~/.sshrc
     sshrc me@myserver
     tmuxrussell
     foo
