@@ -1,4 +1,3 @@
-```html
 <pre>
 Installation
 
@@ -21,4 +20,3 @@ Usage
     sshrc me@myserver
 
 </pre>
-```
