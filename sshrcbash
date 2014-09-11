@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
-if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
-source $SSHHOME/.sshrc
-export PATH=$PATH:$SSHHOME;
