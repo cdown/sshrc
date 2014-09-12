@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 function sshrc() {
     local SSHHOME=${SSHHOME:=~}
-    if [ -e $SSHHOME/.sshrc ]; then
+    if [ -f $SSHHOME/.sshrc ]; then
         local files=.sshrc
         if [ -d $SSHHOME/.sshrc.d ]; then
             files="$files .sshrc.d"
@@ -22,7 +22,7 @@ EOF
 )"' | xxd -ps -r > "'$SSHHOME/bashsshrc'"
             chmod +x "'$SSHHOME/bashsshrc'"
             export SSHRCCLEANUP="'$SSHHOME'"
-            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar xz -C "'$SSHHOME'"
+            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSHHOME'"
             export SSHHOME="'$SSHHOME'"
             #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc; export PATH="'$PATH'":"'$SSHHOME'"')
             "'$SSHHOME'"/bashsshrc
