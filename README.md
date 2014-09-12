@@ -25,7 +25,7 @@ sshrc works just like ssh, but it also sources ~/.sshrc after logging in remotel
     $ type ..
     .. is aliased to `cd ..'
 
-You can use this to set environment variables, define functions, and run post-login commands. It's that simple. For more advanced configuration, continue reading.
+You can use this to set environment variables, define functions, and run post-login commands. It's that simple, and it won't impact other users on the server - even if they use sshrc too. For more advanced configuration, continue reading.
 
 <h2>Advanced configuration</h2>
 
@@ -44,11 +44,11 @@ Putting too much data in ~/.sshrc.d will slow down your login times. If the fold
 If you use tmux frequently, you can make sshrc work there as well.
 
     $ echo 'SHELL=$SSHHOME/bashsshrc
-      alias tmuxrussell="tmux -S /tmp/russelltmuxserver"
+      alias tmux="tmux -S /tmp/russelltmuxserver"
       alias foo="echo I work with tmux, too"' > ~/.sshrc
     $ sshrc me@myserver
     $ tmuxrussell
     $ foo
     I work with tmux, too
 
-After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. You can still use vanilla tmux, but don't start the first shell on the standard tmux server (as long as `tmux ls` is nonempty you're okay) without running `unset SHELL`. Otherwise your server's coinhabitants will get your configurations when they log into the tmux server you created.
+After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable set: if the server isn't already running, other users will get your configurations with their own sessions.
