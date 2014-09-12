@@ -24,7 +24,7 @@
     $ type ..
     .. is aliased to `cd ..'
 
-Just specify whatever bash commands you would like to run after sshing into your server in ~/.sshrc. The tool will copy the file to a temp folder on the server, and source that file after starting bash.
+Just specify whatever bash commands you would like to run after sshing into your server in ~/.sshrc. The tool will copy the file to a temp folder on the server, and source that file after starting bash. Other users of the server will not be affected.
 
 <h2>Advanced Usage</h2>
     $ mkdir -p ~/.sshrc.d
