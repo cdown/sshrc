@@ -25,6 +25,8 @@ sshrc works just like ssh, but it also sources ~/.sshrc after logging in remotel
     $ type ..
     .. is aliased to `cd ..'
 
+You can use this to set environment variables, define functions, and run post-login commands.
+
 Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to the /tmp directory after login. You can find them on the sever at $SSHHOME/.sshrc.d
 
     $ mkdir -p ~/.sshrc.d
