@@ -51,4 +51,4 @@ If you use tmux frequently, you can make sshrc work there as well.
     $ foo
     I work with tmux, too
 
-After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable set: if the server isn't already running, other users will get your configurations with their own sessions.
+After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
