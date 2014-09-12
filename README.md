@@ -12,8 +12,9 @@
     $ chmod +x sshrc
     $ sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
 
+<h2>Usage</h2>
 
-<h2>Basic Usage</h2>
+sshrc works just like ssh, but it also sources ~/.sshrc after logging in remotely.
 
     $ echo "echo welcome" > ~/.sshrc
     $ sshrc me@myserver
@@ -24,28 +25,18 @@
     $ type ..
     .. is aliased to `cd ..'
 
-Just specify whatever bash commands you would like to run after sshing into your server in ~/.sshrc. The tool will copy the file to a temp folder on the server, and source that file after starting bash. Other users of the server will not be affected.
-
-Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Sshrc will let you load these configurations into your ssh session. Just put the config files into a ~/.sshrc.d directory. They will be copied to the server and can be accessed at `$SSHHOME/.sshrc.d`.
-
-    $ mkdir -p ~/.sshrc.d
-    $ echo 'some data' > ~/.sshrc.d/data.txt
-    $ echo 'cat $SSHHOME/.sshrc.d/data.txt' > ~/.sshrc
-    $ sshrc me@myserver
-    some data
-    
-The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your sshrc attempts.
-
-<h2>Vim Usage</h2>
-Here is a more practical example of how to take advantage of the ~/.sshrc.d with vim.
+Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to the /tmp directory after login. You can find them on the sever at $SSHHOME/.sshrc.d
 
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
     $ echo 'VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
+    
+Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 1MB, the server may start blocking your sshrc attempts.
 
-<h2>Tmux Usage</h2>
+If you use tmux frequently, you can make sshrc work there as well.
+
     $ echo 'SHELL=$SSHHOME/bashsshrc
       alias tmuxrussell="tmux -S /tmp/russelltmuxserver"
       alias foo="echo I work with tmux, too"' > ~/.sshrc
