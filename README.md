@@ -26,7 +26,8 @@
 
 Just specify whatever bash commands you would like to run after sshing into your server in ~/.sshrc. The tool will copy the file to a temp folder on the server, and source that file after starting bash. Other users of the server will not be affected.
 
-<h2>Advanced Usage</h2>
+Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Sshrc will let you load these configurations into your ssh session. Just put the config files into a ~/.sshrc.d directory. They will be copied to the server and can be accessed at `$SSHHOME/.sshrc.d`.
+
     $ mkdir -p ~/.sshrc.d
     $ echo 'some data' > ~/.sshrc.d/data.txt
     $ echo 'cat $SSHHOME/.sshrc.d/data.txt' > ~/.sshrc
