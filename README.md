@@ -14,9 +14,17 @@
 
 
 <h2>Basic Usage</h2>
+
     $ echo "echo welcome" > ~/.sshrc
     $ sshrc me@myserver
     welcome
+
+    $ echo "alias ..='cd ..'" > ~/.sshrc
+    $ sshrc me@myserver
+    $ type ..
+    .. is aliased to `cd ..'
+
+Just specify whatever bash commands you would like to run after sshing into your server in ~/.sshrc. The tool will copy the file to a temp folder on the server, and source that file after starting bash.
 
 <h2>Advanced Usage</h2>
     $ mkdir -p ~/.sshrc.d
