@@ -29,6 +29,8 @@ You can use this to set environment variables, define functions, and run post-lo
 
 Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the /tmp directory after login. You can find them on the sever at $SSHHOME/.sshrc.d
 
+Once the config files are on the server, you can tell programs to load their configuration from the $SSHHOME/.sshrc.d directory.
+
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
     $ echo 'VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
