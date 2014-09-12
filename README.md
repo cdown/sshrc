@@ -34,7 +34,7 @@ Your most import configuration files (e.g. vim, inputrc) may not be bash scripts
     $ sshrc me@myserver
     some data
     
-The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your ssh attempts.
+The contents of ~/.sshrc.d will be copied to $SSHHOME/.sshrc.d under /tmp. Try not to stuff too much junk into your ~/.sshrc.d. It'll slow down your login times, and if the folder contents are > 1MB, the server may start blocking your sshrc attempts.
 
 <h2>Vim Usage</h2>
 Here is a more practical example of how to take advantage of the ~/.sshrc.d with vim.
