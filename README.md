@@ -14,7 +14,7 @@
 
 <h2>Usage</h2>
 
-sshrc works just like ssh, but it also sources ~/.sshrc after logging in remotely.
+sshrc works just like ssh, but it also sources the ~/.sshrc on your local computer after logging in remotely.
 
     $ echo "echo welcome" > ~/.sshrc
     $ sshrc me@myserver
