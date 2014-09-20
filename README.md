@@ -1,17 +1,3 @@
-<h2>Installation</h2>
-
-<h3>Ubuntu (12.04 and 14.04 only):</h3>
-    
-    $ sudo add-apt-repository ppa:russell-s-stewart/ppa
-    $ sudo apt-get update
-    $ sudo apt-get install sshrc
-
-
-<h3>Everything else:</h3>
-    $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
-    $ chmod +x sshrc
-    $ sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
-
 <h2>Usage</h2>
 
 sshrc works just like ssh, but it also sources the ~/.sshrc on your local computer after logging in remotely.
@@ -26,6 +12,20 @@ sshrc works just like ssh, but it also sources the ~/.sshrc on your local comput
     .. is aliased to `cd ..'
 
 You can use this to set environment variables, define functions, and run post-login commands. It's that simple, and it won't impact other users on the server - even if they use sshrc too. This makes sshrc very useful if you share a server with multiple users and can't edit the server's ~/.bashrc without affecting them, or if you have several servers that you don't want to configure independently. For more advanced configuration, continue reading.
+
+<h2>Installation</h2>
+
+<h3>Ubuntu (12.04 and 14.04 only):</h3>
+    
+    $ sudo add-apt-repository ppa:russell-s-stewart/ppa
+    $ sudo apt-get update
+    $ sudo apt-get install sshrc
+
+
+<h3>Everything else:</h3>
+    $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
+    $ chmod +x sshrc
+    $ sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
 
 <h2>Advanced configuration</h2>
 
