@@ -29,9 +29,9 @@ You can use this to set environment variables, define functions, and run post-lo
 
 <h2>Advanced configuration</h2>
 
-Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the /tmp directory after login. You can find them on the sever at $SSHHOME/.sshrc.d
+Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at $SSHHOME/.sshrc.d
 
-Once the config files are on the server, you can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim uses the VIM environment variable.
+You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim uses the VIM environment variable.
 
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
