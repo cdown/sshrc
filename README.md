@@ -47,7 +47,7 @@ If you use tmux frequently, you can make sshrc work there as well.
       alias tmux="tmux -S /tmp/russelltmuxserver"
       alias foo="echo I work with tmux, too"' > ~/.sshrc
     $ sshrc me@myserver
-    $ tmuxrussell
+    $ tmux
     $ foo
     I work with tmux, too
 
