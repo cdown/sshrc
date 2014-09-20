@@ -35,7 +35,7 @@ You can usually tell programs to load their configuration from the $SSHHOME/.ssh
 
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
-    $ echo 'VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
+    $ echo 'export VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
     
@@ -43,7 +43,7 @@ Putting too much data in ~/.sshrc.d will slow down your login times. If the fold
 
 If you use tmux frequently, you can make sshrc work there as well.
 
-    $ echo 'SHELL=$SSHHOME/bashsshrc
+    $ echo 'export SHELL=$SSHHOME/bashsshrc
       alias tmux="tmux -S /tmp/russelltmuxserver"
       alias foo="echo I work with tmux, too"' > ~/.sshrc
     $ sshrc me@myserver
