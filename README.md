@@ -23,7 +23,7 @@ You can use this to set environment variables, define functions, and run post-lo
 
 ### Archlinux
 
-[Install][aur-install] the [sshrc-git][] AUR package.
+Install the [sshrc-git][] AUR package.
 
 ### Everything else
 
@@ -57,5 +57,4 @@ If you use tmux frequently, you can make sshrc work there as well.
 
 After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
 
-[aur-install]: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
