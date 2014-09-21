@@ -25,6 +25,10 @@ You can use this to set environment variables, define functions, and run post-lo
 
 Install the [sshrc-git][] AUR package.
 
+### OS X
+
+    $ brew install sshrc
+
 ### Everything else
 
     $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
