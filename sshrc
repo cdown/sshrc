@@ -6,10 +6,10 @@ function sshrc() {
         if [ -d $SSHHOME/.sshrc.d ]; then
             files="$files .sshrc.d"
         fi
-        ssh -t ${*:1} "
-            export SSHHOME="'$(mktemp -d)'"
-            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHHOME/sshrc'"
-            chmod +x "'$SSHHOME/sshrc'"
+        ssh -t "$@" "
+            export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
+            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > \$SSHHOME/sshrc
+            chmod +x \$SSHHOME/sshrc
             echo $'"$( cat << 'EOF' | xxd -ps
 #!/usr/bin/env bash
 bash --rcfile <(echo '
@@ -19,14 +19,13 @@ source '$SSHHOME'/.sshrc;
 export PATH=$PATH:'$SSHHOME'
 ')
 EOF
-)"' | xxd -ps -r > "'$SSHHOME/bashsshrc'"
-            chmod +x "'$SSHHOME/bashsshrc'"
-            export SSHRCCLEANUP="'$SSHHOME'"
-            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSHHOME'"
-            export SSHHOME="'$SSHHOME'"
-            #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc; export PATH="'$PATH'":"'$SSHHOME'"')
-            "'$SSHHOME'"/bashsshrc
-            rm -rf "'$SSHRCCLEANUP'" 
+)"' | xxd -ps -r > \$SSHHOME/bashsshrc
+            chmod +x \$SSHHOME/bashsshrc
+            export SSHRCCLEANUP=\$SSHHOME
+            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C \$SSHHOME
+            export SSHHOME=\$SSHHOME
+            \$SSHHOME/bashsshrc
+            rm -rf \$SSHRCCLEANUP
             "
     else
         echo "No such file: $SSHHOME/.sshrc"
