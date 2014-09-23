@@ -17,7 +17,7 @@ if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
 if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
 source '$SSHHOME'/.sshrc;
 export PATH=$PATH:'$SSHHOME'
-')
+') "$@"
 EOF
 )"' | xxd -ps -r > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
