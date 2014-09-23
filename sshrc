@@ -7,6 +7,7 @@ function sshrc() {
             files="$files .sshrc.d"
         fi
         ssh -t "$@" "
+            if [ -e /etc/motd ]; then cat /etc/motd; fi
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
