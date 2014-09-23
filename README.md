@@ -67,7 +67,7 @@ See the active issues if you're having a problem. Here are known current issues:
 
 * In rare cases your system may complain when you change your VIM environment variable. You can use `alias vim='vim -u /path/to/.vimrc'` in these cases.
 * xxd must be installed on both your local computer and server. If this is not the case, you can't use the tool.
-* Temp files are not deleted during a ssh timeout due to the script being killed with a SIGHUP message before cleanup. A solution for this may come in the future. If this is a problem for you, the most recent version of sshrc will help you by naming your tempfiles like e.g. /tmp/.russell.sshrc.awIL so that you can remove any old ones efficiently with `rm -r /tmp/.russell*`
+* Temp files are not deleted during a ssh timeout due to the script being killed with a SIGHUP message before cleanup. A solution for this is coming soon. If this is a problem for you, the most recent version of sshrc will help you by naming your tempfiles like e.g. /tmp/.russell.sshrc.awIL so that you can remove any old ones efficiently with `rm -r /tmp/.russell*`
 * Finally, if the tool is hanging or giving errors about argument strings, you'll most likely need to reduce the size of your .sshrc.d directory.
 
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
