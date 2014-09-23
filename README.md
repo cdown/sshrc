@@ -47,7 +47,7 @@ You can usually tell programs to load their configuration from the $SSHHOME/.ssh
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
-Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 1MB, the server may start blocking your sshrc attempts.
+Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 100kB, the server may start blocking your sshrc attempts.
 
 If you use tmux frequently, you can make sshrc work there as well.
 
@@ -60,5 +60,14 @@ If you use tmux frequently, you can make sshrc work there as well.
     I work with tmux, too
 
 After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
+
+### Troubleshooting
+
+See the active issues if you're having a problem. Here are known current issues:
+
+* In rare cases your system may complain when you change your VIM environment variable. You can use `alias vim='vim -u /path/to/.vimrc'` in these cases.
+* xxd must be installed on both your local computer and server. If this is not the case, you can't use the tool.
+* Temp files are not deleted during a ssh timeout due to the script being killed with a SIGHUP message before cleanup. A solution for this may come in the future. If this is a problem for you, the most recent version of sshrc will help you by naming your tempfiles like e.g. /tmp/.russell.sshrc.awIL so that you can remove any old ones efficiently with `rm -r /tmp/.russell*`
+* Finally, if the tool is hanging or giving errors about argument strings, you'll most likely need to reduce the size of your .sshrc.d directory.
 
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
