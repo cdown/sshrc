@@ -51,7 +51,8 @@ Putting too much data in ~/.sshrc.d will slow down your login times. If the fold
 
 If you use tmux frequently, you can make sshrc work there as well.
 
-    $ alias tmux='SHELL=$SSHHOME/bashsshrc tmux -S /tmp/russelltmux'
+    $ echo 'alias tmux="SHELL=$SSHHOME/bashsshrc tmux -S /tmp/russelltmux"
+      export SHELL=`which bash`
       alias foo="echo I work with tmux, too"' > ~/.sshrc
     $ sshrc me@myserver
     $ tmux
