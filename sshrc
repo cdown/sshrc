@@ -11,7 +11,7 @@ function sshrc() {
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
-            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > \$SSHHOME/sshrc
+            echo $'"$(cat "$0" | xxd -ps)"' | xxd -ps -r > \$SSHHOME/sshrc
             chmod +x \$SSHHOME/sshrc
             echo $'"$( cat << 'EOF' | xxd -ps
 #!/usr/bin/env bash
