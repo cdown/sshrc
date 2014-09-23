@@ -14,7 +14,7 @@ function sshrc() {
             chmod +x \$SSHHOME/sshrc
             echo $'"$( cat << 'EOF' | xxd -ps
 #!/usr/bin/env bash
-bash --rcfile <(echo '
+exec bash --rcfile <(echo '
 if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
 if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
 source '$SSHHOME'/.sshrc;
