@@ -51,14 +51,15 @@ Putting too much data in ~/.sshrc.d will slow down your login times. If the fold
 
 If you use tmux frequently, you can make sshrc work there as well.
 
-    $ echo 'alias tmux="SHELL=$SSHHOME/bashsshrc tmux -S /tmp/russelltmuxserver"
+    $ echo 'export SHELL=$SSHHOME/bashsshrc
+      alias tmux="tmux -S /tmp/russelltmuxserver"
       alias foo="echo I work with tmux, too"' > ~/.sshrc
     $ sshrc me@myserver
     $ tmux
     $ foo
     I work with tmux, too
 
-When the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
+After the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
 
 ### Troubleshooting
 
