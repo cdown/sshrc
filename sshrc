@@ -8,6 +8,8 @@ function sshrc() {
         fi
         ssh -t "$@" "
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
+            export SSHRCCLEANUP=\$SSHHOME
+            trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
             echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > \$SSHHOME/sshrc
             chmod +x \$SSHHOME/sshrc
             echo $'"$( cat << 'EOF' | xxd -ps
@@ -21,7 +23,6 @@ export PATH=$PATH:'$SSHHOME'
 EOF
 )"' | xxd -ps -r > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
-            export SSHRCCLEANUP=\$SSHHOME
             echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C \$SSHHOME
             export SSHHOME=\$SSHHOME
             \$SSHHOME/bashsshrc
