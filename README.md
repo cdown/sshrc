@@ -51,7 +51,7 @@ If you use tmux frequently, you can make sshrc work there as well.
     alias foo='echo I work with tmux, too'
     
     tmuxrc() {
-    local TMUXDIR=/tmp/russelltmuxserver
+        local TMUXDIR=/tmp/russelltmuxserver
         if ! [ -d $TMUXDIR ]; then
             rm -rf $TMUXDIR
             mkdir -p $TMUXDIR
