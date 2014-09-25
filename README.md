@@ -43,7 +43,7 @@ You can usually tell programs to load their configuration from the $SSHHOME/.ssh
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
-Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 100kB, the server may start blocking your sshrc attempts.
+Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 64kB, the server may block your sshrc attempts.
 
 If you use tmux frequently, you can make sshrc work there as well. The following seems complicated, but hopefully it should just work.
 
