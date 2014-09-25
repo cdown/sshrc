@@ -93,7 +93,7 @@ You may have different configurations for different servers. I recommend the fol
 
 ### Contributing
 
-If you have a niche similar in spirit to the above tmux and vim configurations (e.g. screen), please consider adding a page to the wiki.
+If you have a niche similar in spirit to the above tmux and vim configurations (e.g. screen, mosh), please consider adding a page to the wiki.
 
 ## Troubleshooting
 
