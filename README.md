@@ -33,7 +33,7 @@ Install the [sshrc-git][] AUR package.
 
 ## Advanced configuration
 
-Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at `$SSHHOME/.sshrc.d`. You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 64kB, the server may block your sshrc attempts. For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login.
+Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at `$SSHHOME/.sshrc.d`. You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 64kB, the server may block your sshrc attempts.
 
 ### Vim
 
@@ -82,7 +82,15 @@ You may have different configurations for different servers. I recommend the fol
     if [ $(hostname | sed -n '/server2/p' | wc -l) == 1 ]; then
         echo 'server2'
     fi
-    
+
+### Hints
+
+* Consider sourcing your ~/.sshrc from your ~/.bashrc to avoid code repitition.
+
+* I don't recommend trying to throw your entire .vim folder into ~/.sshrc.d. It will more than likely be too big.
+
+* For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login.
+
 ### Contributing
 
 If you have a niche similar in spirit to the above tmux and vim configurations (e.g. screen), please consider adding a page to the wiki.
