@@ -45,7 +45,7 @@ You can usually tell programs to load their configuration from the $SSHHOME/.ssh
 
 Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 100kB, the server may start blocking your sshrc attempts.
 
-If you use tmux frequently, you can make sshrc work there as well.
+If you use tmux frequently, you can make sshrc work there as well. The following seems complicated, but hopefully it should just work.
 
     $ cat << 'EOF' > ~/.sshrc
     alias foo='echo I work with tmux, too'
