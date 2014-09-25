@@ -67,7 +67,7 @@ If you use tmux frequently, you can make sshrc work there as well.
     $ foo
     I work with tmux, too
 
-The -S option will start a separate tmux server at /tmp/russelltmuxserver. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `mytmux` function copies your configs to the more permenant /tmp/russelltmuxserver. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal.
+The -S option will start a separate tmux server at /tmp/russelltmuxserver/tmuxserver. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `mytmux` function copies your configs to the more permenant /tmp/russelltmuxserver. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal.
 
 ### Troubleshooting
 
