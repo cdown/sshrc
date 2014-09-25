@@ -38,8 +38,10 @@ Your most import configuration files (e.g. vim, inputrc) may not be bash scripts
 You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim uses the VIM environment variable.
 
     $ mkdir -p ~/.sshrc.d
-    $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
-    $ echo 'export VIM=$SSHHOME/.sshrc.d' > ~/.sshrc
+    $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/.vimrc
+    $ cat << 'EOF' > ~/.sshrc
+    export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+    EOF
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
@@ -73,9 +75,7 @@ The -S option will start a separate tmux server. You can still safely access the
 
 See the active issues if you're having a problem. Here are known current issues:
 
-* In rare cases your system may complain when you change your VIM environment variable. You can use `alias vim='vim -u /path/to/.vimrc'` in these cases.
 * xxd must be installed on both your local computer and server. If this is not the case, you can't use the tool. xxd can be installed via `apt-get install vim-common` or `yum install vim-common`
-* Temp files are not deleted during a ssh timeout due to the script being killed with a SIGHUP message before cleanup. This is fixed in master.
-* Finally, if the tool is hanging or giving errors about argument strings, you'll most likely need to reduce the size of your .sshrc.d directory. To debug the directory size, use `tar cz -h -C ~ .sshrc .sshrc.d | wc -c`
+* If the tool is hanging or giving errors about argument strings, you'll most likely need to reduce the size of your .sshrc.d directory. To debug the directory size, use `tar cz -h -C ~ .sshrc .sshrc.d | wc -c`
 
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
