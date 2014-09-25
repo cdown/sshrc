@@ -50,7 +50,7 @@ If you use tmux frequently, you can make sshrc work there as well.
     $ cat << 'EOF' > ~/.sshrc
     alias foo='echo I work with tmux, too'
     
-    mytmux() {
+    tmuxrc() {
     local TMUXDIR=/tmp/russelltmuxserver
         if ! [ -d $TMUXDIR ]; then
             rm -rf $TMUXDIR
@@ -67,7 +67,7 @@ If you use tmux frequently, you can make sshrc work there as well.
     $ foo
     I work with tmux, too
 
-The -S option will start a separate tmux server. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `mytmux` function copies your configs to the more permenant /tmp/russelltmuxserver, which won't be deleted when you close your ssh session. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal.
+The -S option will start a separate tmux server. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `tmuxrc` function copies your configs to the more permenant /tmp/russelltmuxserver, which won't be deleted when you close your ssh session. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal.
 
 ### Troubleshooting
 
