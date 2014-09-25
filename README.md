@@ -47,15 +47,27 @@ Putting too much data in ~/.sshrc.d will slow down your login times. If the fold
 
 If you use tmux frequently, you can make sshrc work there as well.
 
-    $ echo 'alias tmux="SHELL=$SSHHOME/bashsshrc tmux -S /tmp/russelltmux"
-      export SHELL=`which bash`
-      alias foo="echo I work with tmux, too"' > ~/.sshrc
+    $ cat << 'EOF' > ~/.sshrc
+    alias foo='echo I work with tmux, too'
+    
+    mytmux() {
+    local TMUXDIR=/tmp/russelltmuxserver
+        if ! [ -d $TMUXDIR ]; then
+            rm -rf $TMUXDIR
+            mkdir -p $TMUXDIR
+        fi
+        rm -rf $TMUXDIR/.sshrc.d
+        cp -r $SSHHOME/.sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc $SSHHOME/.sshrc.d $TMUXDIR
+        SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc /usr/bin/tmux -S $TMUXDIR/tmuxserver $@
+    }
+    export SHELL=`which bash`
+    EOF
     $ sshrc me@myserver
-    $ tmux
+    $ mytmux
     $ foo
     I work with tmux, too
 
-When the SHELL variable is set, any new tmux server will load your configurations. The -S option will start a separate tmux server at /tmp/russelltmuxserver. Don't try to access the vanilla tmux server when your SHELL environment variable is set: if the server isn't already running, other users will get your configurations with their own sessions.
+The -S option will start a separate tmux server at /tmp/russelltmuxserver. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `mytmux` function copies your configs to the more permenant /tmp/russelltmuxserver. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal.
 
 ### Troubleshooting
 
