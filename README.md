@@ -72,7 +72,22 @@ If you use tmux frequently, you can make sshrc work there as well. The following
 
 The -S option will start a separate tmux server. You can still safely access the vanilla tmux server with `tmux`. Tmux servers can persist for longer than your ssh session, so the above `tmuxrc` function copies your configs to the more permenant /tmp/russelltmuxserver, which won't be deleted when you close your ssh session. Starting tmux with the SHELL environment variable set to bashsshrc will take care of loading your configs with each new terminal. Setting SHELL back to /bin/bash when you're done is important to prevent quirks due to tmux sessions having a non-default SHELL variable.
 
-### Troubleshooting
+### Specializing .sshrc to each server
+
+You may have different configurations for different servers. I recommend the following structure for your ~/.sshrc control flow:
+
+    if [ $(hostname | sed -n '/server1/p' | wc -l) == 1 ]; then
+        echo 'server1'
+    fi
+    if [ $(hostname | sed -n '/server2/p' | wc -l) == 1 ]; then
+        echo 'server2'
+    fi
+    
+### Contributing
+
+If you have a niche similar in spirit to the above tmux and vim configurations (e.g. screen), please consider adding a page to the wiki.
+
+## Troubleshooting
 
 See the active issues if you're having a problem. Here are known current issues:
 
