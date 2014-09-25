@@ -63,7 +63,7 @@ If you use tmux frequently, you can make sshrc work there as well. The following
     export SHELL=`which bash`
     EOF
     $ sshrc me@myserver
-    $ mytmux
+    $ tmuxrc
     $ foo
     I work with tmux, too
 
