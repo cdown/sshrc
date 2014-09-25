@@ -31,11 +31,11 @@ Install the [sshrc-git][] AUR package.
     $ chmod +x sshrc
     $ sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
 
-### Advanced configuration
+## Advanced configuration
 
-Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at $SSHHOME/.sshrc.d
+Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at `$SSHHOME/.sshrc.d`. You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 64kB, the server may block your sshrc attempts. For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login.
 
-You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim uses the VIM environment variable.
+### Vim
 
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/.vimrc
@@ -45,7 +45,8 @@ You can usually tell programs to load their configuration from the $SSHHOME/.ssh
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
-Putting too much data in ~/.sshrc.d will slow down your login times. If the folder contents are > 64kB, the server may block your sshrc attempts.
+
+### Tmux
 
 If you use tmux frequently, you can make sshrc work there as well. The following seems complicated, but hopefully it should just work.
 
