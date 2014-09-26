@@ -76,10 +76,10 @@ The -S option will start a separate tmux server. You can still safely access the
 
 You may have different configurations for different servers. I recommend the following structure for your ~/.sshrc control flow:
 
-    if [ $(hostname | sed -n '/server1/p' | wc -l) == 1 ]; then
+    if [ $(hostname | grep server1 | wc -l) == 1 ]; then
         echo 'server1'
     fi
-    if [ $(hostname | sed -n '/server2/p' | wc -l) == 1 ]; then
+    if [ $(hostname | grep server2 | wc -l) == 1 ]; then
         echo 'server2'
     fi
 
