@@ -89,6 +89,8 @@ You may have different configurations for different servers. I recommend the fol
 
 * For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login.
 
+* Try adding `tmuxrc attach` to the end of your ~/.sshrc to use tmux by default.
+
 ### Contributing
 
 If you have a niche similar in spirit to the above tmux and vim configurations (e.g. screen, mosh), please consider adding a page to the wiki.
