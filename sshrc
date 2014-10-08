@@ -6,13 +6,28 @@ function sshrc() {
         if [ -d $SSHHOME/.sshrc.d ]; then
             files="$files .sshrc.d"
         fi
+        SIZE=$(tar cz -h -C ~ $files | wc -c)
+        if [ $SIZE -gt 65536 ]; then
+            echo >&2 $'.sshrc.d and .sshrc files must be less than 64kb\ncurrent size: '$SIZE' bytes'
+            exit 1
+        fi
         ssh -t "$@" "
+            command -v xxd >/dev/null 2>&1 || { echo >&2 \"sshrc requires xxd to be installed on the server, but it's not. Aborting.\"; exit 1; }
             if [ -e /etc/motd ]; then cat /etc/motd; fi
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
             echo $'"$(cat "$0" | xxd -p)"' | xxd -p -r > \$SSHHOME/sshrc
             chmod +x \$SSHHOME/sshrc
+
+            echo $'"$( cat << 'EOF' | xxd -p
+if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
+if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
+source $SSHHOME/.sshrc;
+export PATH=$PATH:$SSHHOME
+EOF
+)"' | xxd -p -r > \$SSHHOME/sshrc.bashrc
+
             echo $'"$( cat << 'EOF' | xxd -p
 #!/usr/bin/env bash
 exec bash --rcfile <(echo '
@@ -24,16 +39,17 @@ export PATH=$PATH:'$SSHHOME'
 EOF
 )"' | xxd -p -r > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
+
             echo $'"$(tar cz -h -C $SSHHOME $files | xxd -p)"' | xxd -p -r | tar mxz -C \$SSHHOME
             export SSHHOME=\$SSHHOME
-            \$SSHHOME/bashsshrc
-            rm -rf \$SSHRCCLEANUP
+            bash --rcfile \$SSHHOME/sshrc.bashrc
             "
     else
         echo "No such file: $SSHHOME/.sshrc"
     fi
 }
 if [ $1 ]; then
+    command -v xxd >/dev/null 2>&1 || { echo >&2 "sshrc requires xxd to be installed locally, but it's not. Aborting."; exit 1; }
     sshrc $@
 else
     ssh
