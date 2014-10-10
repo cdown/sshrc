@@ -6,7 +6,7 @@ function sshrc() {
         if [ -d $SSHHOME/.sshrc.d ]; then
             files="$files .sshrc.d"
         fi
-        SIZE=$(tar cz -h -C ~ $files | wc -c)
+        SIZE=$(tar cz -h -C $SSHHOME $files | wc -c)
         if [ $SIZE -gt 65536 ]; then
             echo >&2 $'.sshrc.d and .sshrc files must be less than 64kb\ncurrent size: '$SIZE' bytes'
             exit 1
