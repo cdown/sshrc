@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# moshrc is an alternative to sshrc for mosh users
+
+
 function moshrc() {
     local SSHHOME=${SSHHOME:=~}
     if [ -f $SSHHOME/.sshrc ]; then
