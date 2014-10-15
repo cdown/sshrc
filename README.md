@@ -83,17 +83,10 @@ You may have different configurations for different servers. I recommend the fol
         echo 'server2'
     fi
 
-### Hints
+### Tips
 
 * I don't recommend trying to throw your entire .vim folder into ~/.sshrc.d. It will more than likely be too big.
 
 * For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login..
-
-## Troubleshooting
-
-See the active issues if you're having a problem. Here are known current issues:
-
-* xxd must be installed on both your local computer and server. If this is not the case, you can't use the tool. xxd can be installed via `apt-get install vim-common` or `yum install vim-common`
-* If the tool is hanging or giving errors about argument strings, you'll most likely need to reduce the size of your .sshrc.d directory. To debug the directory size, use `tar cz -h -C ~ .sshrc .sshrc.d | wc -c`
 
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
