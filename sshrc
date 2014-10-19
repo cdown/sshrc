@@ -23,8 +23,8 @@ function sshrc() {
             echo $'"$( cat << 'EOF' | xxd -p
 if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
 if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
-source $SSHHOME/.sshrc;
 export PATH=$PATH:$SSHHOME
+source $SSHHOME/.sshrc;
 EOF
 )"' | xxd -p -r > \$SSHHOME/sshrc.bashrc
 
