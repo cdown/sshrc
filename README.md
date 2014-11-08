@@ -27,9 +27,9 @@ Install the [sshrc-git][] AUR package.
 
 ### Everything else
 
-    $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
-    $ chmod +x sshrc
-    $ sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
+    $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc && 
+    chmod +x sshrc && 
+    sudo mv sshrc /usr/local/bin #or anywhere else on your PATH
 
 ## Advanced configuration
 
