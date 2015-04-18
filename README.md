@@ -15,18 +15,16 @@ You can use this to set environment variables, define functions, and run post-lo
 
 ## Installation
 
+#### OS X
+
+    $ brew update && brew install sshrc
+    
 #### Ubuntu (12.04 and 14.04 only)
 
     $ sudo add-apt-repository ppa:russell-s-stewart/ppa
     $ sudo apt-get update
     $ sudo apt-get install sshrc
-
-#### OS X
-
-    $ brew update && brew install sshrc
-
-#### Archlinux
-Install the [sshrc-git][] AUR package.
+    
 #### Everything else
 
     $ wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc && 
