@@ -19,7 +19,7 @@ You can use this to set environment variables, define functions, and run post-lo
 
     $ brew update && brew install sshrc
     
-#### Ubuntu (12.04 and 14.04 only)
+#### Ubuntu (12.04 or 14.04+)
 
     $ sudo add-apt-repository ppa:russell-s-stewart/ppa
     $ sudo apt-get update
