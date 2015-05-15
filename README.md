@@ -17,7 +17,7 @@ You can use this to set environment variables, define functions, and run post-lo
 
 #### OS X
 
-    $ brew update && brew install sshrc
+    $ brew install sshrc
     
 #### Ubuntu (12.04 or 14.04+)
 
