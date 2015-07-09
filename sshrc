@@ -21,8 +21,11 @@ function sshrc() {
             chmod +x \$SSHHOME/sshrc
 
             echo $'"$( cat << 'EOF' | xxd -p
-if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
-if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
+[ -r /etc/profile ] && source /etc/profile
+if [ -r ~/.bash_profile ]; then source ~/.bash_profile
+elif [ -r ~/.bash_login ]; then source ~/.bash_login
+elif [ -r ~/.profile ]; then source ~/.profile
+fi
 export PATH=$PATH:$SSHHOME
 source $SSHHOME/.sshrc;
 EOF
@@ -31,8 +34,11 @@ EOF
             echo $'"$( cat << 'EOF' | xxd -p
 #!/usr/bin/env bash
 exec bash --rcfile <(echo '
-if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
-if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
+[ -r /etc/profile ] && source /etc/profile
+if [ -r ~/.bash_profile ]; then source ~/.bash_profile
+elif [ -r ~/.bash_login ]; then source ~/.bash_login
+elif [ -r ~/.profile ]; then source ~/.profile
+fi
 source '$SSHHOME'/.sshrc;
 export PATH=$PATH:'$SSHHOME'
 ') "$@"
