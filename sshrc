@@ -21,7 +21,7 @@ function sshrc() {
             chmod +x \$SSHHOME/sshrc
 
             echo $'"$( cat << 'EOF' | xxd -p
-[ -r /etc/profile ] && source /etc/profile
+if [ -r /etc/profile ]; then source /etc/profile; fi
 if [ -r ~/.bash_profile ]; then source ~/.bash_profile
 elif [ -r ~/.bash_login ]; then source ~/.bash_login
 elif [ -r ~/.profile ]; then source ~/.profile
