@@ -55,9 +55,9 @@ EOF
         exit 1
     fi
 }
-if [ $1 ]; then
+if [ "$1" ]; then
     command -v xxd >/dev/null 2>&1 || { echo >&2 "sshrc requires xxd to be installed locally, but it's not. Aborting."; exit 1; }
-    sshrc $@
+    sshrc "$@"
 else
     ssh
 fi
