@@ -17,6 +17,7 @@ function moshrc() {
         mosh "$@" -- /bin/bash -c "
             command -v xxd >/dev/null 2>&1 || { echo >&2 \"sshrc requires xxd to be installed on the server, but it's not. Aborting.\"; exit 1; }
             if [ -e /etc/motd ]; then cat /etc/motd; fi
+            if [ -e /etc/update-motd.d ]; then run-parts /etc/update-motd.d/; fi
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
