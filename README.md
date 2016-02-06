@@ -2,11 +2,11 @@
 
 sshrc works just like ssh, but it also sources the ~/.sshrc on your local computer after logging in remotely.
 
-    $ echo "echo welcome" > ~/.sshrc
+    $ echo "echo welcome" >> ~/.sshrc
     $ sshrc me@myserver
     welcome
 
-    $ echo "alias ..='cd ..'" > ~/.sshrc
+    $ echo "alias ..='cd ..'" >> ~/.sshrc
     $ sshrc me@myserver
     $ type ..
     .. is aliased to `cd ..'
@@ -38,8 +38,8 @@ Your most import configuration files (e.g. vim, inputrc) may not be bash scripts
 ### Vim
 
     $ mkdir -p ~/.sshrc.d
-    $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/.vimrc
-    $ cat << 'EOF' > ~/.sshrc
+    $ echo ':imap <special> jk <Esc>' >> ~/.sshrc.d/.vimrc
+    $ cat << 'EOF' >> ~/.sshrc
     export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
     EOF
     $ sshrc me@myserver
@@ -50,7 +50,7 @@ Your most import configuration files (e.g. vim, inputrc) may not be bash scripts
 
 If you use tmux frequently, you can make sshrc work there as well. The following seems complicated, but hopefully it should just work.
 
-    $ cat << 'EOF' > ~/.sshrc
+    $ cat << 'EOF' >> ~/.sshrc
     alias foo='echo I work with tmux, too'
     
     tmuxrc() {
