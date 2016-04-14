@@ -91,10 +91,7 @@ You may have different configurations for different servers. I recommend the fol
 
 * For larger configurations, consider copying files to an obscure folder on the server and using ~/.sshrc to automatically source those configurations on login.
 
-* To enable parameter completion in Zsh, add the following line to your .zshrc file:
+* To enable tab completion in zsh, add `compdef sshrc=ssh` to your .zshrc file:
 
-    ```
-    compdef sshrc=ssh
-    ```
 
 [sshrc-git]: https://aur.archlinux.org/packages/sshrc-git
