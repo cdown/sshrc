@@ -12,16 +12,16 @@ function sshrc() {
             exit 1
         fi
         ssh -t "$@" "
-            command -v xxd >/dev/null 2>&1 || { echo >&2 \"sshrc requires xxd to be installed on the server, but it's not. Aborting.\"; exit 1; }
+            command -v openssl >/dev/null 2>&1 || { echo >&2 \"sshrc requires openssl to be installed on the server, but it's not. Aborting.\"; exit 1; }
             if [ -e /etc/motd ]; then cat /etc/motd; fi
             if [ -e /etc/update-motd.d ]; then run-parts /etc/update-motd.d/ 2>/dev/null; fi
             export SSHHOME=\$(mktemp -d -t .$(whoami).sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
-            echo $'"$(cat "$0" | xxd -p)"' | xxd -p -r > \$SSHHOME/sshrc
+            echo $'"$(cat "$0" | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc
             chmod +x \$SSHHOME/sshrc
 
-            echo $'"$( cat << 'EOF' | xxd -p
+            echo $'"$( cat << 'EOF' | openssl enc -base64
 if [ -r /etc/profile ]; then source /etc/profile; fi
 if [ -r ~/.bash_profile ]; then source ~/.bash_profile
 elif [ -r ~/.bash_login ]; then source ~/.bash_login
@@ -30,9 +30,9 @@ fi
 export PATH=$PATH:$SSHHOME
 source $SSHHOME/.sshrc;
 EOF
-)"' | xxd -p -r > \$SSHHOME/sshrc.bashrc
+)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
 
-            echo $'"$( cat << 'EOF' | xxd -p
+            echo $'"$( cat << 'EOF' | openssl enc -base64
 #!/usr/bin/env bash
 exec bash --rcfile <(echo '
 [ -r /etc/profile ] && source /etc/profile
@@ -44,10 +44,10 @@ source '$SSHHOME'/.sshrc;
 export PATH=$PATH:'$SSHHOME'
 ') "$@"
 EOF
-)"' | xxd -p -r > \$SSHHOME/bashsshrc
+)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
 
-            echo $'"$(tar cz -h -C $SSHHOME $files | xxd -p)"' | xxd -p -r | tar mxz -C \$SSHHOME
+            echo $'"$(tar cz -h -C $SSHHOME $files | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxz -C \$SSHHOME
             export SSHHOME=\$SSHHOME
             bash --rcfile \$SSHHOME/sshrc.bashrc
             "
@@ -57,7 +57,7 @@ EOF
     fi
 }
 if [ "$1" ]; then
-    command -v xxd >/dev/null 2>&1 || { echo >&2 "sshrc requires xxd to be installed locally, but it's not. Aborting."; exit 1; }
+    command -v openssl >/dev/null 2>&1 || { echo >&2 "sshrc requires openssl to be installed locally, but it's not. Aborting."; exit 1; }
     sshrc "$@"
 else
     ssh
