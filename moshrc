@@ -44,7 +44,7 @@ EOF
 )' | xxd -p -r > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
 
-            echo $'$(tar cz -h -C $SSHHOME $files | xxd -p)' | xxd -p -r | tar mxz -C \$SSHHOME
+            echo $'$(tar czf - -h -C $SSHHOME $files | xxd -p)' | xxd -p -r | tar mxzf - -C \$SSHHOME
             export SSHHOME=\$SSHHOME
             bash --rcfile \$SSHHOME/sshrc.bashrc
             "
