@@ -22,29 +22,29 @@ function sshrc() {
             chmod +x \$SSHHOME/sshrc
 
             echo $'"$( cat << 'EOF' | openssl enc -base64
-if [ -r /etc/profile ]; then source /etc/profile; fi
-if [ -r ~/.bash_profile ]; then source ~/.bash_profile
-elif [ -r ~/.bash_login ]; then source ~/.bash_login
-elif [ -r ~/.profile ]; then source ~/.profile
-fi
-export PATH=$PATH:$SSHHOME
-source $SSHHOME/.sshrc;
+                if [ -r /etc/profile ]; then source /etc/profile; fi
+                if [ -r ~/.bash_profile ]; then source ~/.bash_profile
+                elif [ -r ~/.bash_login ]; then source ~/.bash_login
+                elif [ -r ~/.profile ]; then source ~/.profile
+                fi
+                export PATH=$PATH:$SSHHOME
+                source $SSHHOME/.sshrc;
 EOF
-)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
+                )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
 
             echo $'"$( cat << 'EOF' | openssl enc -base64
 #!/usr/bin/env bash
-exec bash --rcfile <(echo '
-[ -r /etc/profile ] && source /etc/profile
-if [ -r ~/.bash_profile ]; then source ~/.bash_profile
-elif [ -r ~/.bash_login ]; then source ~/.bash_login
-elif [ -r ~/.profile ]; then source ~/.profile
-fi
-source '$SSHHOME'/.sshrc;
-export PATH=$PATH:'$SSHHOME'
-') "$@"
+                exec bash --rcfile <(echo '
+                [ -r /etc/profile ] && source /etc/profile
+                if [ -r ~/.bash_profile ]; then source ~/.bash_profile
+                elif [ -r ~/.bash_login ]; then source ~/.bash_login
+                elif [ -r ~/.profile ]; then source ~/.profile
+                fi
+                source '$SSHHOME'/.sshrc;
+                export PATH=$PATH:'$SSHHOME'
+                ') "$@"
 EOF
-)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/bashsshrc
+                )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
 
             echo $'"$(tar cz -h -C $SSHHOME $files | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxz -C \$SSHHOME
