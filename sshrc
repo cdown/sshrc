@@ -88,7 +88,7 @@ function sshrc_parse() {
     shift
   done
   if [ -z $DOMAIN ]; then
-    ssh || exit 1;
+    ssh $SSHARGS; exit 1;
   fi
 }
 
