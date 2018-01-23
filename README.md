@@ -45,6 +45,14 @@ Your most import configuration files (e.g. vim, inputrc) may not be bash scripts
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
+If you want to load your .vim folder as well, you can 1) put the .vim folder in ~/.sshrc.d, 2) move your .vimrc into the .vim folder, 3) edit the path above to reflect the new .vimrc location, and 4) add the following lines at the top of the moved .vimrc, which will notify vim of the .vim folder location:
+
+    " set default 'runtimepath' (without ~/.vim folders)
+    let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
+    " what is the name of the directory containing this file?
+    let s:portable = expand('<sfile>:p:h')
+    " add the directory to 'runtimepath'
+    let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
 
 ### Tmux
 
